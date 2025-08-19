@@ -1,6 +1,5 @@
 {
     "version": 2,
-    "name": "rigopa-risk-governance-platform",
     "builds": [
         {
             "src": "server/index.ts",
@@ -23,13 +22,5 @@
             "src": "/(.*)",
             "dest": "/client/$1"
         }
-    ],
-    "env": {
-        "NODE_ENV": "production"
-    },
-    "regions": [
-        "iad1"
-    ],
-    "buildCommand": "npm run build",
-    "outputDirectory": "dist"
+    ]
 }
