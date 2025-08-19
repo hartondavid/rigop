@@ -1,0 +1,466 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RiGoPA - Risk & Governance Platform for Public Administration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'gov-blue': '#1976D2',
+                        'gov-green': '#388E3C',
+                        'gov-orange': '#F57C00',
+                        'gov-red': '#D32F2F',
+                        'gov-gray': '#666666',
+                        'gov-light': '#FAFAFA',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-inter bg-gov-light min-h-screen">
+    <!-- @COMPONENT: AppLayout -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- @COMPONENT: Sidebar -->
+        <aside class="w-64 bg-white shadow-lg flex-shrink-0 border-r border-gray-200">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gov-blue rounded-lg flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">RiGoPA</h1>
+                        <p class="text-xs text-gov-gray">Risk & Governance Platform</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="mt-6">
+                <div class="px-3 space-y-1">
+                    <a href="#" class="bg-gov-blue text-white group flex items-center px-3 py-2 text-sm font-medium rounded-md">
+                        <i class="fas fa-tachometer-alt mr-3 text-white"></i>
+                        Dashboard
+                    </a>
+                    <a href="#" class="text-gray-700 hover:bg-gray-100 group flex items-center px-3 py-2 text-sm font-medium rounded-md">
+                        <i class="fas fa-file-contract mr-3 text-gov-gray"></i>
+                        Contract Tracker
+                    </a>
+                    <a href="#" class="text-gray-700 hover:bg-gray-100 group flex items-center px-3 py-2 text-sm font-medium rounded-md">
+                        <i class="fas fa-history mr-3 text-gov-gray"></i>
+                        Touch Point History
+                    </a>
+                    <a href="#" class="text-gray-700 hover:bg-gray-100 group flex items-center px-3 py-2 text-sm font-medium rounded-md">
+                        <i class="fas fa-check-circle mr-3 text-gov-gray"></i>
+                        Compliance Engine
+                    </a>
+                    <a href="#" class="text-gray-700 hover:bg-gray-100 group flex items-center px-3 py-2 text-sm font-medium rounded-md">
+                        <i class="fas fa-chart-line mr-3 text-gov-gray"></i>
+                        Analytics
+                    </a>
+                    <a href="#" class="text-gray-700 hover:bg-gray-100 group flex items-center px-3 py-2 text-sm font-medium rounded-md">
+                        <i class="fas fa-clipboard-list mr-3 text-gov-gray"></i>
+                        Audit Trail
+                    </a>
+                </div>
+                
+                <div class="mt-8 px-3">
+                    <h3 class="px-3 text-xs font-semibold text-gov-gray uppercase tracking-wider">Quick Actions</h3>
+                    <div class="mt-3 space-y-1">
+                        <button class="w-full text-left text-gray-700 hover:bg-gray-100 group flex items-center px-3 py-2 text-sm font-medium rounded-md">
+                            <i class="fas fa-upload mr-3 text-gov-gray"></i>
+                            Upload Contract
+                        </button>
+                        <button class="w-full text-left text-gray-700 hover:bg-gray-100 group flex items-center px-3 py-2 text-sm font-medium rounded-md">
+                            <i class="fas fa-download mr-3 text-gov-gray"></i>
+                            Export Report
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <!-- @END_COMPONENT: Sidebar -->
+
+        <!-- @COMPONENT: MainContent -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto">
+            <!-- @COMPONENT: Header -->
+            <header class="bg-white shadow-sm border-b border-gray-200">
+                <div class="flex items-center justify-between px-8 py-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">Dashboard Overview</h2>
+                        <p class="text-sm text-gov-gray">Monitor contract risks and compliance status</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="bg-gov-blue hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center">
+                            <i class="fas fa-plus mr-2"></i>
+                            New Contract
+                        </button>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-gray-600 text-sm"></i>
+                            </div>
+                            <span class="text-sm font-medium text-gray-700" data-bind="user.name">Admin User</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- @END_COMPONENT: Header -->
+
+            <div class="p-8">
+                <!-- @COMPONENT: KPICards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gov-gray">Active Contracts</p>
+                                <p class="text-3xl font-bold text-gray-900" data-bind="contracts.active">247</p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-file-contract text-gov-blue text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <span class="text-sm text-green-600 font-medium">+12%</span>
+                            <span class="text-sm text-gov-gray ml-2">vs last month</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gov-gray">High Risk Contracts</p>
+                                <p class="text-3xl font-bold text-gov-red" data-bind="contracts.highRisk">18</p>
+                            </div>
+                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-exclamation-triangle text-gov-red text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <span class="text-sm text-red-600 font-medium">-3</span>
+                            <span class="text-sm text-gov-gray ml-2">vs last week</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gov-gray">Compliance Score</p>
+                                <p class="text-3xl font-bold text-gov-green" data-bind="compliance.score">94.2%</p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-check-circle text-gov-green text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <span class="text-sm text-green-600 font-medium">+2.1%</span>
+                            <span class="text-sm text-gov-gray ml-2">improvement</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gov-gray">Pending Reviews</p>
+                                <p class="text-3xl font-bold text-gov-orange" data-bind="reviews.pending">31</p>
+                            </div>
+                            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-clock text-gov-orange text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <span class="text-sm text-gov-gray">Avg: 3.2 days</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: KPICards -->
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                    <!-- @COMPONENT: ContractUploadCard -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Upload</h3>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gov-blue transition-colors">
+                                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                                <p class="text-sm text-gray-600 mb-2">Drop contract files here or</p>
+                                <button class="text-gov-blue hover:text-blue-700 font-medium text-sm" data-implementation="Should trigger file upload dialog">Browse Files</button>
+                                <p class="text-xs text-gov-gray mt-2">Supports PDF, DOC, DOCX up to 50MB</p>
+                            </div>
+                            <div class="mt-4 space-y-2">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gov-gray">Auto-categorization</span>
+                                    <span class="text-green-600"><i class="fas fa-check"></i> Enabled</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gov-gray">Risk assessment</span>
+                                    <span class="text-green-600"><i class="fas fa-check"></i> Enabled</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: ContractUploadCard -->
+
+                    <!-- @COMPONENT: RiskTrendsChart -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Risk Trends</h3>
+                                <select class="text-sm border border-gray-300 rounded-md px-3 py-1">
+                                    <option>Last 30 days</option>
+                                    <option>Last 90 days</option>
+                                    <option>Last year</option>
+                                </select>
+                            </div>
+                            <!-- Chart placeholder -->
+                            <div class="h-64 bg-gray-50 rounded-lg flex items-center justify-center" data-implementation="Implement chart using Chart.js or similar">
+                                <div class="text-center">
+                                    <i class="fas fa-chart-line text-4xl text-gray-400 mb-2"></i>
+                                    <p class="text-gray-500">Risk trend visualization</p>
+                                    <p class="text-xs text-gov-gray">Chart showing risk scores over time</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: RiskTrendsChart -->
+                </div>
+
+                <!-- @COMPONENT: ContractListTable -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-8">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold text-gray-900">Recent Contracts</h3>
+                            <div class="flex items-center space-x-3">
+                                <div class="relative">
+                                    <input type="text" placeholder="Search contracts..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-md text-sm">
+                                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                                </div>
+                                <button class="text-sm text-gov-blue hover:text-blue-700 font-medium">View All</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contract</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vendor</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Value</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Risk Score</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Next Milestone</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <!-- @MAP: contracts.map(contract => ( -->
+                                <tr data-mock="true">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">IT Infrastructure Services</div>
+                                        <div class="text-sm text-gov-gray">Contract #GOV-2024-001</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">TechServ Solutions</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">€250,000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                            High (8.2)
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                            Under Review
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Legal Review (2 days)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-gov-blue hover:text-blue-700 mr-3">View</button>
+                                        <button class="text-gov-gray hover:text-gray-900">Edit</button>
+                                    </td>
+                                </tr>
+                                
+                                <tr data-mock="true">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">Office Supplies Procurement</div>
+                                        <div class="text-sm text-gov-gray">Contract #GOV-2024-002</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Global Office Ltd</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">€45,500</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Low (2.1)
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Active
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Delivery Check (5 days)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-gov-blue hover:text-blue-700 mr-3">View</button>
+                                        <button class="text-gov-gray hover:text-gray-900">Edit</button>
+                                    </td>
+                                </tr>
+
+                                <tr data-mock="true">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">Building Maintenance</div>
+                                        <div class="text-sm text-gov-gray">Contract #GOV-2024-003</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Facility Pro Services</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">€128,000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                            Medium (5.7)
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                            Draft
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">SOW Creation (1 day)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-gov-blue hover:text-blue-700 mr-3">View</button>
+                                        <button class="text-gov-gray hover:text-gray-900">Edit</button>
+                                    </td>
+                                </tr>
+                                <!-- @END_MAP )) -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: ContractListTable -->
+
+                <!-- @COMPONENT: TouchPointHistory -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Recent Touch Points</h3>
+                        <div class="space-y-4">
+                            <!-- @MAP: touchPoints.map(touchPoint => ( -->
+                            <div class="flex items-start space-x-3" data-mock="true">
+                                <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-envelope text-gov-blue text-sm"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-gray-900">Email Update Received</p>
+                                    <p class="text-sm text-gov-gray">Contract #GOV-2024-001 - Vendor response to legal queries</p>
+                                    <p class="text-xs text-gov-gray">2 hours ago • TechServ Solutions</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3" data-mock="true">
+                                <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-gov-green text-sm"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-gray-900">Milestone Completed</p>
+                                    <p class="text-sm text-gov-gray">Contract #GOV-2024-002 - Delivery confirmation received</p>
+                                    <p class="text-xs text-gov-gray">1 day ago • Global Office Ltd</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3" data-mock="true">
+                                <div class="flex-shrink-0 w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-exclamation text-gov-orange text-sm"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-gray-900">Delay Alert</p>
+                                    <p class="text-sm text-gov-gray">Contract #GOV-2024-003 - SOW creation overdue by 2 days</p>
+                                    <p class="text-xs text-gov-gray">3 days ago • System Alert</p>
+                                </div>
+                            </div>
+                            <!-- @END_MAP )) -->
+                        </div>
+                        <button class="mt-4 text-sm text-gov-blue hover:text-blue-700 font-medium">View All Touch Points</button>
+                    </div>
+
+                    <!-- @COMPONENT: ComplianceChecks -->
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Compliance Status</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-shield-alt text-gov-green"></i>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">EU Procurement Directive</p>
+                                        <p class="text-xs text-gov-gray">All contracts compliant</p>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-medium text-gov-green">100%</span>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-exclamation-triangle text-gov-orange"></i>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Data Protection Rules</p>
+                                        <p class="text-xs text-gov-gray">3 contracts need review</p>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-medium text-gov-orange">92%</span>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-file-alt text-gov-blue"></i>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Documentation Standards</p>
+                                        <p class="text-xs text-gov-gray">Documentation complete</p>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-medium text-gov-blue">98%</span>
+                            </div>
+                        </div>
+                        <button class="mt-4 text-sm text-gov-blue hover:text-blue-700 font-medium">View Detailed Report</button>
+                    </div>
+                    <!-- @END_COMPONENT: ComplianceChecks -->
+                </div>
+            </div>
+        </main>
+        <!-- @END_COMPONENT: MainContent -->
+    </div>
+    <!-- @END_COMPONENT: AppLayout -->
+
+    <!-- @COMPONENT: Modal for Contract Details (Hidden by default) -->
+    <div class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden" id="contractModal" data-implementation="Show/hide with JavaScript">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-full overflow-y-auto">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-gray-900">Contract Details - IT Infrastructure Services</h3>
+                        <button class="text-gray-400 hover:text-gray-600" data-event="click:closeModal">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <!-- Contract details content would go here -->
+                    <p class="text-gray-600">Contract details, risk analysis, timeline, and compliance information would be displayed here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: Modal -->
+
+    <script>
+        (function() {
+            // TODO: Implement real-time updates for KPIs and contract status
+            // TODO: Add interactive chart functionality using Chart.js
+            // TODO: Implement contract upload with file validation
+            // TODO: Add filtering and sorting for contract table
+            // TODO: Connect to backend API for real data
+            
+            // Simple modal functionality for demonstration
+            // In production, this would be handled by React state management
+            console.log('RiGoPA Dashboard initialized');
+        })();
+    </script>
+</body>
+</html>
